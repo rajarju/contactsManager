@@ -1,0 +1,1 @@
+Simple app to try out backbone.js
