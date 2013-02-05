@@ -1,0 +1,39 @@
+.contact-container { width:400px; padding:10px; border:1px solid #aaa; margin:0 10px 10px 0; float:left; font-family:sans-serif; color:#333; background-color:#eee; }
+.contact-container h1 { margin:0; font-weight:normal; }
+.contact-container h1 span { float:right; font-size:14px; line-height:24px; font-weight:normal; }
+.contact-container img { border-width:1px; border-style:solid; border-color:#fff; border-right-color:#aaa; border-bottom-color:#aaa; margin-right:10px; float:left; }
+.contact-container div { margin-bottom:24px; font-size:14px; }
+.contact-container a { color:#333;}
+.contact-container dl { margin:0; float:left; font-size:14px; }
+.contact-container dt, .contact-container dd { margin:0; float:left; }
+.contact-container dt { width:50px; clear:left; }
+
+#addContact{
+	width: 400px;
+	padding: 10px;
+	border: 1px solid hsl(0, 0%, 67%);
+	margin: 0 10px 10px 0;
+	float: left;
+	font-family: sans-serif;
+	color: hsl(0, 0%, 20%);
+	background-color: hsl(0, 0%, 93%);
+}
+#addContact div.image{
+	width: 160px;
+	float: left;
+	margin: 0;
+	height: 152px;
+	position: relative;
+}
+#addContact div.image input{
+	width: 85px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -7px 0 0 -45px;
+}
+
+#addContact label{
+	width: 70px;
+	float: left;
+}
