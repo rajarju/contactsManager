@@ -1,6 +1,14 @@
-  //Contact view
-    //View for individual contacts
-    var ContactView = Backbone.View.extend({
+  define([
+    'jquery',
+    'underscore',
+    'backbone',
+
+    'text!templates/contact/contact.html'
+    ], function($, _, Backbone, template){
+
+
+        //View for individual contacts
+        var ContactView = Backbone.View.extend({
         //Tag name for the element
         tagName: "article",
         //Events
@@ -11,7 +19,7 @@
         className: "contact-container",
         //Get template html, hidden in the html file
         //Inside a script tag
-        template: $("#contactTemplate").html(),
+        template: template,
         //Render function, called to generate the output html
         render: function(){
             //_.template takes html and returns a function
@@ -35,3 +43,7 @@
             directory.resetFilters();
         }
     });
+
+  return ContactView;
+});
+

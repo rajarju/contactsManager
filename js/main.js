@@ -8,3 +8,8 @@
     backbone: 'libs/backbone/backbone'
  	}
  });
+
+
+ require(['app'], function(App){
+ 	App.initialize();
+ });
