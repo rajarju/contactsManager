@@ -3,9 +3,11 @@ define([
 	'underscore',
 	'backbone',
 
-	'collections/contacts'
+	'collections/contacts',
 
-	], function($, _, Backbone, Directory){
+    'views/contact/contact',
+
+	], function($, _, Backbone, ContactView, Directory){
 
     //Directory View
     //View for list of contacts

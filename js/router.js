@@ -2,7 +2,7 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'views/contact/contact',
+	//'views/contact/contact',
 	'views/contact/directory'
 	], function($, _, Backbone, ContactView, DirectoryView){
 
@@ -21,7 +21,7 @@ define([
 			});
 
 			var directory = new DirectoryView();
-			var contactsRouter = new ContactsRouter();
+			//var contactsRouter = new ContactsRouter();
 			Backbone.History.start();
 
 		};
