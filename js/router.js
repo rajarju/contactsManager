@@ -4,7 +4,7 @@ define([
 	'backbone',
 	'views/contact/contact',
 	'views/contact/directory'
-	], function($, _, backbone, ContactView, DirectoryView){
+	], function($, _, Backbone, ContactView, DirectoryView){
 
 		var AppRouter  = Backbone.Router.extend({
 			routes: {
