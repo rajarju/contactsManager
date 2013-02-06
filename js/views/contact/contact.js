@@ -3,7 +3,7 @@
     'underscore',
     'backbone',
 
-    'text!templates/contact/contact.html'
+    'text!../../../templates/contact/contact.html'
     ], function($, _, Backbone, template){
 
 

@@ -1,9 +1,9 @@
 define([
 	'jquery',
 	'underscore',
-	'backbone'
+	'backbone',
 
-	'collection/contacts'
+	'collections/contacts'
 
 	], function($, _, Backbone, Directory){
 
@@ -152,5 +152,5 @@ define([
           });
 
 return DirectoryView;
-}
+});
 
