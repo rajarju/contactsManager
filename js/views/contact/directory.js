@@ -19,7 +19,7 @@ define([
         //Initialize function
         initialize: function(){
             //Create new collection with the contacts 
-            this.collection = new Directory(window.contacts);
+            this.collection = new Directory();
 
             //generate output
             this.render();
