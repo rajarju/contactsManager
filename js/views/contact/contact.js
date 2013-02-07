@@ -31,8 +31,9 @@
             return this;
         },
         //Remove a contact
-        deleteContact : function(){
+        deleteContact : function(e){
 
+            e.preventDefault();
             //remove from contacts            
             //Remove the model
             this.model.destroy();

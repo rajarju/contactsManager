@@ -28,9 +28,7 @@ define([
                 });
 
                 this.on('add', function(item){                
-                    //Temp save in contacts array            
-                    this.contacts.push(item.attributes);
-                    this.push();
+
                 });
                 //On remove of an item
                 this.on('remove', function(item){
@@ -54,18 +52,37 @@ define([
             },
 
             pull: function(){
-                this.contacts = JSON.parse(window.localStorage.getItem('contacts'));
+                this.contacts = JSON.parse(window.localStorage.getItem('contacts'));                
             },
 
-            populate: function(){   
+            populate: function(filter){   
                 _.each(this.contacts, function(contact){
-                    this.addContact(contact);
+
+                    if(filter !== undefined){
+                        if(contact.type.toLowerCase() === filter){
+                            this.addModel(contact);        
+                        }                        
+                    }
+                    else{
+                        this.addModel(contact);
+                    }
+                    
                 }, this);
 
             },
 
-            addContact: function(newModel){
+            refresh: function(filterType){
+                this.pull();     
+                this.populate(filterType);
+            },
+
+            addModel : function(newModel){
                 this.add(new ContactModel(newModel)); 
+            },
+            addContact: function(newContact){
+                this.contacts.push(newContact)
+                this.addModel(newContact);
+                this.push();
             }
 
         });      

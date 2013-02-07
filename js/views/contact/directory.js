@@ -45,7 +45,7 @@ define([
         render: function(){
         	var that = this;
 
-        	this.$el.find("article").remove();
+        	this.empty();
 
             //loop through the contacts and generate html for each
             _.each(this.collection.models, function(item){
@@ -53,6 +53,11 @@ define([
                 that.renderContact(item);
             }, this);
         },
+
+        empty: function(){
+            this.$el.find("article").remove();
+        },
+
         //Method to generate output html for each Contact View item
         renderContact: function(item){
             //Generate a new contact view object for each model item
@@ -107,28 +112,21 @@ define([
         },
         //Function to filter the contacts based on selected type
         filterByType: function(){
+            this.empty();
             //if type is all reset the view
             if(this.filterType == 'all'){
-            	this.collection.reset(contacts);
+            	this.collection.refresh();
             	Backbone.history.navigate('filter/all');
             }
             else{
-                //Reset the view to show all the contacts before filtering
-                //Silent attribute it set because, you dont want to trigger the reset event while doing this
-                this.collection.reset(contacts, {silent: true});
-                //Get the selected filter type
-                var filterType = this.filterType,
-                    //Generate the filtered array of contacts
-                    filtered = _.filter(this.collection.models, function(item){
-                        //Looping throught the collection models,
-                        //Compare the type for each model element to the selected filter
-                        return item.get('type').toLowerCase() === filterType;
-                    });              
-                    Backbone.history.navigate('filter/' + filterType);
-                //Reset the contacts list with the filtered type names
-                this.collection.reset(filtered);
 
-            }
+                var filterType = this.filterType;            
+                
+                Backbone.history.navigate('filter/' + filterType);
+                //Reset the contacts list with the filtered type names
+                this.collection.refresh(filterType);
+
+            }            
         },
 
         //Add new contact form callback
@@ -136,26 +134,26 @@ define([
             //Prevent form submission
             e.preventDefault();
             //To hold new entry
-            var newModel = {};
+            var newContact = {};
             //Get all the input values
             //Validate and sort them in an object
             $("#addContact").find("input").each(function (i, el) {
             	if ($(el).val() !== "") {
-            		newModel[el.id] = $(el).val();
+            		newContact[el.id] = $(el).val();
             	}
             });
 
-            delete newModel['photo'];
+            //delete newContact['photo'];
             //Check if the type of contact is not already in the types list
-            if(_.indexOf(this.getTypes(), newModel.type) === -1){
+            if(_.indexOf(this.getTypes(), newContact.type) === -1){
                 //Add the new entry
-                this.collection.addContact(newModel); 
+                this.collection.addContact(newContact); 
                 //Remove the select list and add a new updated one
                 this.$el.find('#filter').find('select').remove().end().append(this.createSelect());
             }
             else{
                 //Add the new entry
-                this.collection.addContact(newModel); 
+                this.collection.addContact(newContact); 
             }
 
         }
