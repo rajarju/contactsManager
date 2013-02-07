@@ -35,7 +35,9 @@
 
             //remove from contacts            
             //Remove the model
-            this.model.destroy();
+            this.model.removeContact(this);
+            //Remove from contacts
+
             //Remove the view
             this.remove();
         

@@ -9,7 +9,7 @@ define([
 
 
 
-	], function($, _, Backbone, ContactView, Directory){
+    ], function($, _, Backbone, ContactView, Directory){
 
     //Directory View
     //View for list of contacts
@@ -31,9 +31,10 @@ define([
             this.collection.on('reset', this.render, this);
             //Render newly added contact
             this.collection.on('add', this.renderContact, this);
-            //On remove of item from collection
-            //this.collection.on('remove', this.removeContact, this);
-          },
+
+            this.collection.on('remove', this.resetFilters, this);
+
+        },
         //Events
         events: {
         	"change #filter select": 'setFilter',
@@ -50,8 +51,8 @@ define([
             _.each(this.collection.models, function(item){
                 //Call render function for each contact view
                 that.renderContact(item);
-              }, this);
-          },
+            }, this);
+        },
         //Method to generate output html for each Contact View item
         renderContact: function(item){
             //Generate a new contact view object for each model item
@@ -60,20 +61,22 @@ define([
             });
             //Append the output html from each Contact view to the parent element
             this.$el.append(contactView.render().el);
-          },
+        },
 
         //Function which takes all type names from the address entry
         //Returns only the unique ones in lower case
         getTypes : function(){
         	return _.uniq(this.collection.pluck('type'), false, function(type){
-        		return type.toLowerCase();
-        	});
+                if(type !== undefined){
+                  return type.toLowerCase();
+              }
+          });
         },
 
         resetFilters : function(){
             //Initialize the select filter
             this.$el.find('#filter').empty().append(this.createSelect());
-          },
+        },
 
         //Append options to the select
         createSelect: function(){
@@ -86,14 +89,16 @@ define([
 
             //Loop through the items and append options to the select element
             _.each(this.getTypes(), function(item){
-            	var option = $('<option>', {
-            		value : item.toLowerCase(),
-            		text: item.toLowerCase()
-            	}).appendTo(select);
-            });
+                if(item !== undefined){
+                   var option = $('<option>', {
+                      value : item.toLowerCase(),
+                      text: item.toLowerCase()
+                  }).appendTo(select);
+               }
+           });
             //Return the select element
             return select;
-          },
+        },
 
         //Select on change callback
         setFilter: function(e){
@@ -105,7 +110,7 @@ define([
             //if type is all reset the view
             if(this.filterType == 'all'){
             	this.collection.reset(contacts);
-            	contactsRouter.navigate('filter/all');
+            	Backbone.history.navigate('filter/all');
             }
             else{
                 //Reset the view to show all the contacts before filtering
@@ -118,13 +123,13 @@ define([
                         //Looping throught the collection models,
                         //Compare the type for each model element to the selected filter
                         return item.get('type').toLowerCase() === filterType;
-                      });              
-                    contactsRouter.navigate('filter/' + filterType);
+                    });              
+                    Backbone.history.navigate('filter/' + filterType);
                 //Reset the contacts list with the filtered type names
                 this.collection.reset(filtered);
 
-              }
-            },
+            }
+        },
 
         //Add new contact form callback
         addContact: function(e){
@@ -147,14 +152,14 @@ define([
                 this.collection.addContact(newModel); 
                 //Remove the select list and add a new updated one
                 this.$el.find('#filter').find('select').remove().end().append(this.createSelect());
-              }
-              else{
-                //Add the new entry
-                this.collection.add(new Contact(newModel)); 
-              }
-
             }
-          });
+            else{
+                //Add the new entry
+                this.collection.addContact(newModel); 
+            }
+
+        }
+    });
 
 return DirectoryView;
 });

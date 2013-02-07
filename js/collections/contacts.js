@@ -14,7 +14,7 @@ define([
 
             initialize: function(){
                 this.on('reset', function(){
-                    console.log('resetting in collection');
+                    
                 });
 
 
@@ -24,24 +24,13 @@ define([
                 });
                 //On remove of an item
                 this.on('remove', function(item){
-                    var removed = item.attributes;
-                    if (removed.photo === "/img/placeholder.png") {
-                        delete removed.photo;
-                    }
-                    //Find and remove item from the contacts array
-                    _.each(contacts, function (contact) {
-                        if (_.isEqual(contact, removed)) {
-                            contacts.splice(_.indexOf(contacts, contact), 1);
-                        }
-                    });
+                  
                 });
 
             },
 
-
-
             addContact: function(newModel){
-                this.add(new Contact(newModel)); 
+                this.add(new ContactModel(newModel)); 
             }
 
         });      
