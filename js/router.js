@@ -4,7 +4,7 @@ define([
 	'backbone',
 	//'views/contact/contact',
 	'views/contact/directory'
-	], function($, _, Backbone, ContactView, DirectoryView){
+	], function($, _, Backbone, DirectoryView){
 
 		var AppRouter  = Backbone.Router.extend({
 			routes: {
@@ -22,7 +22,7 @@ define([
 
 			var directory = new DirectoryView();
 			//var contactsRouter = new ContactsRouter();
-			Backbone.History.start();
+			Backbone.history.start();
 
 		};
 		return {

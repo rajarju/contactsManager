@@ -3,7 +3,7 @@
     'underscore',
     'backbone',
 
-    'text!../../../templates/contact/contact.html'
+    'text!templates/contact/contact.html'
     ], function($, _, Backbone, template){
 
 
@@ -33,14 +33,12 @@
         //Remove a contact
         deleteContact : function(){
 
-            //remove from contacts
-
+            //remove from contacts            
             //Remove the model
             this.model.destroy();
             //Remove the view
             this.remove();
-
-            directory.resetFilters();
+        
         }
     });
 

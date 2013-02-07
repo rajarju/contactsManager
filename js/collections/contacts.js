@@ -23,8 +23,8 @@ define([
                     contacts.push(item.attributes);
                 });
                 //On remove of an item
-                this.on('remove', function(item){
-                    var removed = item.attributes;
+                this.model.on('destroy', function(model){
+                    var removed = model.attributes;
                     if (removed.photo === "/img/placeholder.png") {
                         delete removed.photo;
                     }
@@ -38,7 +38,14 @@ define([
 
             },
 
+
+
+            addContact: function(newModel){
+                this.add(new ContactModel(newModel)); 
+            }
+
         });      
+    return Directory;
 
 });
 

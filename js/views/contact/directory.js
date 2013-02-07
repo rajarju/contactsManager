@@ -3,9 +3,11 @@ define([
 	'underscore',
 	'backbone',
 
-	'collections/contacts',
-
     'views/contact/contact',
+
+    'collections/contacts',
+
+
 
 	], function($, _, Backbone, ContactView, Directory){
 
@@ -17,7 +19,8 @@ define([
         //Initialize function
         initialize: function(){
             //Create new collection with the contacts 
-            this.collection = new Directory(contacts);
+            this.collection = new Directory(window.contacts);
+
             //generate output
             this.render();
             //Reset and add filters to select list
@@ -141,7 +144,7 @@ define([
             //Check if the type of contact is not already in the types list
             if(_.indexOf(this.getTypes(), newModel.type) === -1){
                 //Add the new entry
-                this.collection.add(new Contact(newModel)); 
+                this.collection.addContact(newModel); 
                 //Remove the select list and add a new updated one
                 this.$el.find('#filter').find('select').remove().end().append(this.createSelect());
               }

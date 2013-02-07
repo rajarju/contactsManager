@@ -5,12 +5,14 @@
  	paths: {
     jquery: 'libs/jquery/jquery',
     underscore: 'libs/underscore/underscore',
-    backbone: 'libs/backbone/backbone'
+    backbone: 'libs/backbone/backbone',
+    templates: '../templates'
  	}
  });
 
 
- require(['app'], function(App){
- 	console.log('here');
+ require([
+ 	'app',
+ 	], function(App){ 	
  		App.initialize();
  });
